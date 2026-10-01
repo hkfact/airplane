@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flights Overhead</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<main>
+			<div class="top">
+				<div>
+					<h1>Flights Overhead</h1>
+					<p class="subtitle">Live aircraft around your location</p>
+				</div>
+				<button id="locate-btn" onclick="startTracking()">
+					Find flights near me
+				</button>
+			</div>
+
+			<section class="radius">
+				<div class="radius-header">
+					<label for="radius-slider">Search radius</label>
+					<div class="radius-input">
+						<input
+							type="number"
+							id="radius-input"
+							min="1"
+							step="any"
+							value="20"
+							aria-label="Search radius in kilometres"
+						/>
+						<span>km</span>
+					</div>
+				</div>
+				<input
+					type="range"
+					id="radius-slider"
+					min="5"
+					max="100"
+					step="5"
+					value="20"
+				/>
+				<div class="radius-scale">
+					<span>5 km</span
+					><span
+						>Slider stops at 100 km — type a larger distance
+						above</span
+					><span>100 km</span>
+				</div>
+			</section>
+
+			<div id="location_data"></div>
+			<p id="status">Press the button to share your location.</p>
+			<div class="radar-wrap" id="radar-wrap">
+				<svg
+					id="radar"
+					viewBox="0 0 600 600"
+					role="img"
+					aria-label="Radar map of nearby flights"
+				>
+					<circle class="radar-bg" cx="300" cy="300" r="270" />
+					<g id="rings"></g>
+					<line class="axis" x1="300" y1="30" x2="300" y2="570" />
+					<line class="axis" x1="30" y1="300" x2="570" y2="300" />
+					<g class="sweep">
+						<path
+							class="sweep-wedge"
+							d="M300 300 L300 30 A270 270 0 0 0 126.4 93.2 Z"
+						/>
+						<line
+							class="sweep-line"
+							x1="300"
+							y1="300"
+							x2="300"
+							y2="30"
+						/>
+					</g>
+					<text class="compass" x="300" y="18">N</text>
+					<text class="compass" x="300" y="594">S</text>
+					<text class="compass" x="14" y="305">W</text>
+					<text class="compass" x="586" y="305">E</text>
+					<g id="dots"></g>
+					<circle class="you-pulse" cx="300" cy="300" r="5" />
+					<circle class="you" cx="300" cy="300" r="6" />
+				</svg>
+				<div id="tooltip" class="tooltip" role="tooltip"></div>
+			</div>
+			<div class="legend">
+				<span><i class="l-you"></i>You</span>
+				<span><i class="l-air"></i>Airborne</span>
+				<span><i class="l-ground"></i>On ground</span>
+				<span>Tick = direction of travel</span>
+			</div>
+		</main>
+		<script src="script.js"></script>
+	</body>
+</html>
