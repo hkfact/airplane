@@ -1,4 +1,5 @@
-const API_BASE = "http://localhost:5000";
+// OpenSky is called straight from the browser, so the app can be hosted as static files (e.g. GitHub Pages)
+const OPENSKY_URL = "https://opensky-network.org/api/states/all";
 const KM_PER_DEGREE = 111;
 
 // Radar geometry (matches the SVG viewBox in index.html)
@@ -137,7 +138,7 @@ function getFlightData() {
 	const requestId = ++latestRequest;
 	const radius = radiusKm; // capture: the slider may move before the response arrives
 	const params = new URLSearchParams(getBounds(radius));
-	const url = `${API_BASE}/flights?${params}`;
+	const url = `${OPENSKY_URL}?${params}`;
 	console.log("requesting flight data from URL:\n", url);
 
 	setStatus(`Looking for flights within ${radius} km…`);
